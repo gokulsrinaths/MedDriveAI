@@ -1,16 +1,39 @@
 [build]
   command = "npm run build"
-  publish = ".next"
+  publish = "out"
+  environment = { NODE_VERSION = "18.17.1" }
 
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
-  NODE_VERSION = "18.17.1"
   NPM_FLAGS = "--legacy-peer-deps --no-audit --no-fund"
   NEXT_TELEMETRY_DISABLED = "1"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+[[plugins]]
+  package = "netlify-plugin-cache"
+  [plugins.inputs]
+    paths = [
+      "node_modules/.cache",
+      ".next/cache"
+    ]
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Handle client-side routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Enable brotli compression
 [build.processing]
   skip_processing = false
 
@@ -26,21 +49,4 @@
   pretty_urls = true
 
 [build.processing.images]
-  compress = true
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-[functions]
-  directory = "netlify/functions"
-
-# Cache node_modules and Next.js cache
-[[plugins]]
-  package = "netlify-plugin-cache"
-  [plugins.inputs]
-    paths = [
-      "node_modules/.cache",
-      ".next/cache"
-    ] 
+  compress = true 
