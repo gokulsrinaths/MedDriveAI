@@ -2,50 +2,35 @@
   "name": "meddrive",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "18.17.1",
-    "npm": ">=9.0.0"
-  },
   "scripts": {
     "dev": "next dev",
+    "clean": "rimraf .next out",
+    "prebuild": "npm run clean",
     "build": "next build && next export",
     "start": "next start",
-    "lint": "next lint",
-    "clean": "rimraf .next out",
-    "prebuild": "npm run clean"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.18",
-    "@radix-ui/react-dialog": "^1.0.5",
-    "@swc/core": "^1.3.107",
-    "@swc/helpers": "^0.5.3",
-    "chart.js": "^4.4.1",
-    "clsx": "^2.1.0",
-    "date-fns": "^3.3.1",
-    "framer-motion": "^11.0.5",
-    "konva": "^9.3.3",
-    "lucide-react": "^0.344.0",
     "next": "14.1.0",
-    "react": "^18.2.0",
-    "react-chartjs-2": "^5.2.0",
-    "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
-    "react-konva": "^18.2.10",
-    "tailwind-merge": "^2.2.1",
-    "tailwindcss-animate": "^1.0.7"
+    "react": "^18",
+    "react-dom": "^18",
+    "lucide-react": "^0.330.0",
+    "@netlify/plugin-nextjs": "^4.41.3"
   },
   "devDependencies": {
-    "@netlify/plugin-nextjs": "^5.11.4",
-    "@types/node": "^20.11.24",
-    "@types/react": "^18.2.61",
-    "@types/react-dom": "^18.2.19",
-    "autoprefixer": "^10.4.17",
-    "eslint": "^8.57.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
     "eslint-config-next": "14.1.0",
-    "netlify-plugin-cache": "^1.0.3",
-    "postcss": "^8.4.35",
+    "postcss": "^8",
     "rimraf": "^5.0.5",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "serve": "^14.2.1",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.17.1"
   }
 }

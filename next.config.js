@@ -1,21 +1,26 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  swcMinify: true,
-  compiler: {
-    removeConsole: process.env.NODE_ENV === "production",
-  },
-  // Enable static exports for Netlify
   output: 'export',
   images: {
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
-  // Disable dynamic routes that can't be statically generated
-  experimental: {
-    missingSuspenseWithCSRError: false,
-  },
-  // Specify routes to prerender
   trailingSlash: true,
-  distDir: '.next',
+  reactStrictMode: true,
+  swcMinify: true,
+  
+  // Enable static export optimization
+  experimental: {
+    appDir: true,
+    serverActions: {
+      allowedOrigins: ['localhost:3000', '*.netlify.app'],
+    },
+  },
 }
 
 module.exports = nextConfig 
