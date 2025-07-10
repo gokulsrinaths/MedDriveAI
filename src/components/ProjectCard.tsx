@@ -6,6 +6,13 @@ type ProjectCardProps = {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const formatDate = (date: string | Date) => {
+    if (date instanceof Date) {
+      return date.toLocaleDateString()
+    }
+    return new Date(date).toLocaleDateString()
+  }
+
   return (
     <Link
       href={`/projects/${project.id}`}
@@ -17,7 +24,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.description}
         </p>
         <div className="mt-4 text-xs text-gray-500">
-          Created on {new Date(project.created_at).toLocaleDateString()}
+          Created on {formatDate(project.created_at)}
         </div>
       </div>
     </Link>

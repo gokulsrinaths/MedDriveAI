@@ -35,7 +35,9 @@ export interface Project {
   title: string;
   description: string;
   dueDate: string;
-  created_at: string;
+  created_at: string | Date;  // Allow both string and Date types
   collaborators: Collaborator[];
   files: ProjectFile[];
+  status?: 'active' | 'completed' | 'on_hold';
+  progress?: number;
 } 
