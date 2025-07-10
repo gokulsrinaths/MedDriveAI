@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { gradients, typography, containers, effects, animations } from '@/lib/premium-design';
+import { gradients, typography, containers, effects, animations, cards } from '@/lib/premium-design';
 import { PlayCircle, Brain, Sparkles, ArrowRight } from 'lucide-react';
 
 export default function DemoPage() {
@@ -44,7 +44,7 @@ export default function DemoPage() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.1 }}
-          className={`${gradients.glass} ${effects.glow} backdrop-blur-xl border border-gray-200/30 dark:border-gray-800/30 rounded-3xl p-8 lg:p-12 mb-8`}
+          className={`${cards.glass} ${effects.glow} backdrop-blur-xl border border-gray-200/30 dark:border-gray-800/30 rounded-3xl p-8 lg:p-12 mb-8`}
         >
           <div className="grid gap-8">
             <div className="text-center">
