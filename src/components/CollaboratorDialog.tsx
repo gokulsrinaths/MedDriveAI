@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { X, Plus, UserPlus } from 'lucide-react'
-import type { Project } from '@/types/project'
+import type { Project, Collaborator } from '@/types/project'
 
 interface CollaboratorDialogProps {
   project: Project
@@ -19,7 +19,7 @@ export default function CollaboratorDialog({
 }: CollaboratorDialogProps) {
   const [newEmail, setNewEmail] = useState('')
   const [error, setError] = useState<string | null>(null)
-  const [collaborators, setCollaborators] = useState<string[]>(project.collaborators)
+  const [collaborators, setCollaborators] = useState<Collaborator[]>(project.collaborators)
 
   if (!isOpen) return null
 
@@ -37,19 +37,26 @@ export default function CollaboratorDialog({
     }
 
     // Check if email is already a collaborator
-    if (collaborators.includes(newEmail)) {
+    if (collaborators.some(collab => collab.email === newEmail)) {
       setError('This email is already a collaborator')
       return
     }
 
     // Add new collaborator
-    setCollaborators(prev => [...prev, newEmail])
+    const newCollaborator: Collaborator = {
+      id: `temp-${Date.now()}`,
+      name: newEmail.split('@')[0], // Use part before @ as temporary name
+      email: newEmail,
+      avatar: '👤' // Default avatar
+    }
+    
+    setCollaborators(prev => [...prev, newCollaborator])
     setNewEmail('')
     onUpdate()
   }
 
   const handleRemoveCollaborator = async (email: string) => {
-    setCollaborators(prev => prev.filter(e => e !== email))
+    setCollaborators(prev => prev.filter(collab => collab.email !== email))
     onUpdate()
   }
 
@@ -95,14 +102,20 @@ export default function CollaboratorDialog({
             <p className="text-sm text-gray-500">No collaborators yet</p>
           ) : (
             <ul className="divide-y divide-gray-100 rounded-md border border-gray-200">
-              {collaborators.map((email) => (
+              {collaborators.map((collaborator) => (
                 <li
-                  key={email}
+                  key={collaborator.id}
                   className="flex items-center justify-between p-3"
                 >
-                  <span className="text-sm">{email}</span>
+                  <div className="flex items-center space-x-2">
+                    <span className="text-lg">{collaborator.avatar}</span>
+                    <div>
+                      <div className="text-sm font-medium">{collaborator.name}</div>
+                      <div className="text-xs text-gray-500">{collaborator.email}</div>
+                    </div>
+                  </div>
                   <button
-                    onClick={() => handleRemoveCollaborator(email)}
+                    onClick={() => handleRemoveCollaborator(collaborator.email)}
                     className="rounded-full p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
                   >
                     <X className="h-4 w-4" />
