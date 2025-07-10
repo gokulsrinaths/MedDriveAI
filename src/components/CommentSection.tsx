@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { MessageSquare, Send, Reply } from 'lucide-react'
+import { MessageSquare, Reply, Send } from 'lucide-react'
 import type { Comment, CommentThread } from '@/types/comment'
 
 const DEMO_COMMENTS: CommentThread[] = [
@@ -58,7 +58,7 @@ function formatTimeAgo(date: string) {
   return Math.floor(seconds) + ' seconds ago'
 }
 
-function SingleComment({ comment, onReply }: { comment: Comment; onReply: (parentId: string) => void }) {
+function SingleComment({ comment, onReply }: { comment: CommentThread; onReply: (parentId: string) => void }) {
   return (
     <div className="space-y-2">
       <div className="flex items-start space-x-3">
@@ -113,7 +113,7 @@ export default function CommentSection({ fileId }: CommentSectionProps) {
     e.preventDefault()
     if (!newComment.trim()) return
 
-    const newCommentObj: Comment = {
+    const newCommentObj: CommentThread = {
       id: Date.now().toString(),
       content: newComment.trim(),
       user: { name: 'Dr. Sarah Chen' }, // Demo user
@@ -128,7 +128,7 @@ export default function CommentSection({ fileId }: CommentSectionProps) {
           if (thread.id === replyTo) {
             return {
               ...thread,
-              replies: [...thread.replies, newCommentObj]
+              replies: [...thread.replies, { ...newCommentObj, replies: [] }]
             }
           }
           return thread
