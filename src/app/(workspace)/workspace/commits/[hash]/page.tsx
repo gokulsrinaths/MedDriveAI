@@ -28,7 +28,7 @@ interface CommitFile {
   deletions: number;
   oldPath?: string;
   newPath?: string;
-  diff?: string;
+  diff?: string | null;
 }
 
 interface DetailedCommit {
