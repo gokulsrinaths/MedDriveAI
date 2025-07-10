@@ -5,7 +5,8 @@
 [build.environment]
   NETLIFY_NEXT_PLUGIN_SKIP = "true"
   NODE_VERSION = "18.17.1"
-  NPM_FLAGS = "--no-audit --no-fund"
+  NPM_FLAGS = "--legacy-peer-deps --no-audit --no-fund"
+  NEXT_TELEMETRY_DISABLED = "1"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
