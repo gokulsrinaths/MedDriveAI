@@ -9,6 +9,13 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Disable dynamic routes that can't be statically generated
+  experimental: {
+    missingSuspenseWithCSRError: false,
+  },
+  // Specify routes to prerender
+  trailingSlash: true,
+  distDir: '.next',
 }
 
 module.exports = nextConfig 
