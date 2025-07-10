@@ -21,28 +21,60 @@ export async function getCommits(projectId: number, fileId: number): Promise<Com
   // Return demo commits
   return [
     {
-      id: 1,
-      project_id: projectId,
-      file_id: fileId,
-      message: 'Updated patient diagnosis section',
-      author: 'Dr. Sarah Chen',
-      created_at: '2024-02-15T10:30:00Z'
+      id: "1",
+      title: "Updated patient diagnosis",
+      description: "Updated patient diagnosis section",
+      type: "file_upload",
+      timestamp: '2024-02-15T10:30:00Z',
+      author: {
+        id: "1",
+        name: "Dr. Sarah Chen",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
+      },
+      projectId: projectId.toString(),
+      changes: [{
+        type: "modified",
+        path: "/files/diagnosis.md",
+        name: "diagnosis.md",
+        oldContent: "Previous diagnosis",
+        newContent: "Updated diagnosis"
+      }]
     },
     {
-      id: 2,
-      project_id: projectId,
-      file_id: fileId,
-      message: 'Added treatment recommendations',
-      author: 'Dr. Michael Lee',
-      created_at: '2024-02-14T15:45:00Z'
+      id: "2",
+      title: "Treatment recommendations",
+      description: "Added treatment recommendations",
+      type: "file_upload",
+      timestamp: '2024-02-14T15:45:00Z',
+      author: {
+        id: "2",
+        name: "Dr. Michael Lee",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael"
+      },
+      projectId: projectId.toString(),
+      changes: [{
+        type: "added",
+        path: "/files/treatment.md",
+        name: "treatment.md"
+      }]
     },
     {
-      id: 3,
-      project_id: projectId,
-      file_id: fileId,
-      message: 'AI analysis complete',
-      author: 'AI System',
-      created_at: '2024-02-13T09:15:00Z'
+      id: "3",
+      title: "AI Analysis",
+      description: "AI analysis complete",
+      type: "file_upload",
+      timestamp: '2024-02-13T09:15:00Z',
+      author: {
+        id: "3",
+        name: "AI System",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=AI"
+      },
+      projectId: projectId.toString(),
+      changes: [{
+        type: "added",
+        path: "/files/ai-analysis.md",
+        name: "ai-analysis.md"
+      }]
     }
   ];
 } 
