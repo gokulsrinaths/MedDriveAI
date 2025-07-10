@@ -35,6 +35,7 @@ export interface Project {
   title: string;
   description: string;
   dueDate: string;
+  created_at: string;
   collaborators: Collaborator[];
   files: ProjectFile[];
 } 
