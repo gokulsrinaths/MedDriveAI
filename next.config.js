@@ -1,19 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    domains: ['localhost'],
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '*.supabase.co',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+  swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production",
   },
-  webpack: (config) => {
-    config.externals = [...config.externals, { canvas: 'canvas' }]  // required for Konva
-    return config
+  // Enable static exports for Netlify
+  output: 'export',
+  images: {
+    unoptimized: true,
   },
 }
 
